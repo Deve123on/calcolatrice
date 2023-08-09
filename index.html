@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calcolatrice</title>
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      animation: colorChange 1s infinite;
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      margin: 10px 0;
+    }
+
+    @keyframes colorChange {
+      0%, 50% {
+        color: blue;
+      }
+      51%, 100% {
+        color: red;
+      }
+    }
+
+    #calculator {
+      background-color: rgba(0, 0, 0, 0.8);
+      width: 300px;
+      margin: 100px auto;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    input[type="text"] {
+      background-color: purple;
+      color: white; /* Cambio del colore del testo a bianco */
+      width: 100%;
+      height: 50px;
+      font-size: 20px;
+      text-align: right;
+      border: none;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      font-weight: bold; /* Testo in grassetto */
+      text-shadow: 0 0 5px white; /* Effetto "led" */
+    }
+
+    table {
+      width: 100%;
+    }
+
+    input[type="button"] {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      margin: 5px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #eee;
+      color: #222;
+    }
+
+    #social {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    #social a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap">
+</head>
+<body>
+  <h1>by mengons</h1>
+
+  <div id="calculator">
+    <input id="display" type="text" disabled>
+    <table>
+      <tr>
+        <td><input type="button" value="7" onclick="addToDisplay('7')"></td>
+        <td><input type="button" value="8" onclick="addToDisplay('8')"></td>
+        <td><input type="button" value="9" onclick="addToDisplay('9')"></td>
+        <td><input type="button" value="/" onclick="addToDisplay('/')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="4" onclick="addToDisplay('4')"></td>
+        <td><input type="button" value="5" onclick="addToDisplay('5')"></td>
+        <td><input type="button" value="6" onclick="addToDisplay('6')"></td>
+        <td><input type="button" value="x" onclick="addToDisplay('*')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="1" onclick="addToDisplay('1')"></td>
+        <td><input type="button" value="2" onclick="addToDisplay('2')"></td>
+        <td><input type="button" value="3" onclick="addToDisplay('3')"></td>
+        <td><input type="button" value="-" onclick="addToDisplay('-')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="0" onclick="addToDisplay('0')"></td>
+        <td><input type="button" value="." onclick="addToDisplay('.')"></td>
+        <td><input type="button" value="=" onclick="calculate()"></td>
+        <td><input type="button" value="+" onclick="addToDisplay('+')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="C" onclick="clearDisplay()"></td>
+        <td><input type="button" value="CT" onclick="clearAll()"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="social">
+    <a href="#">Facebook</a>
+    <a href="#">Twitter</a>
+    <a href="https://www.instagram.com/invites/contact/?i=jyp9kbxygtte&utm_content=h1gxh1p" onclick="confirmExit(event, this)">Instagram</a>
+    <!-- Aggiungi altri link ai tuoi social name -->
+  </div>
+
+  <audio id="buttonSound" preload="auto">
+    <source src="button-click.mp3" type="audio/mpeg">
+    <source src="button-click.ogg" type="audio/ogg">
+    Il tuo browser non supporta l'elemento audio.
+  </audio>
+
+  <script>
+    function addToDisplay(value) {
+      document.getElementById("display").value += value;
+      playButtonSound();
+    }
+
+    function calculate() {
+      const displayValue = document.getElementById("display").value;
+      const result = eval(displayValue);
+      document.getElementById("display").value = result;
+    }
+
+    function confirmExit(event, link) {
+      event.preventDefault();
+      const confirmResponse = confirm("Sei sicuro di uscire dal sito?");
+      if (confirmResponse) {
+        window.location.href = link.href;
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = '';
+    }
+
+    function clearAll() {
+      document.getElementById("display").value = '';
+    }
+
+    function playButtonSound() {
+      var buttonSound = document.getElementById("buttonSound");
+      buttonSound.play();
+    }
+  </script>
+</body>
+</html>
